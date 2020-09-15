@@ -3,12 +3,16 @@
 #include <stdlib.h>
 #define len 100
 
+// fixit: используйте существующую ф-ю http://www.c-cpp.ru/content/isalpha
 int if_letter (char x) {
 	if ( ((x > 47) && (x < 58)) || ((x > 64) && (x < 91)) || ((x > 96) && (x < 123)) ) {
 		return 1;
 	}
 	return 0;
 }
+
+// fixit: мы обсудили на семинаре сигнатуру ф-и: какие параметры ф-я split должна принять на вход и какие вернуть.
+// кажется получилось не совсем то, что планировали.
 
 void ReadText (char * string) {
 	char * local_string = string;
