@@ -5,6 +5,7 @@
 
 void GenerateString(int n, char * string)
 {
+	// 'a' - 1 -яснее выражает мысль
 	char local_char = 96;
 	char * local_string = string;
 	int half_len;
