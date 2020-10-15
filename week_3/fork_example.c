@@ -1,6 +1,10 @@
 #include <stdio.h>
 
-//DONE
+// Example task from the presentation 3
+
+// Not needed on github
+
+// DONE
 
 int main()
 {	

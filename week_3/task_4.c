@@ -5,6 +5,11 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+// Task 4 from the presentation 3
+// Launches helloworld.c from the child process
+
+// Needed on github
+
 // DONE
 
 int main(int argc, char *argv[]) {

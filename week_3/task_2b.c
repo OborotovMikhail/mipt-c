@@ -5,6 +5,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+// Task 2b from the presentation 3
+
+// Needed on github
+
 // DONE
 
 int main(int argc, char *argv[]) {

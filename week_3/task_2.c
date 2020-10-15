@@ -4,7 +4,11 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-//DONE
+// Task 2 from the presentation 3
+
+// Not needed on github
+
+// DONE
 
 int main()
 {	

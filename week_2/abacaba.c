@@ -3,9 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-void GenerateString(int n, char * string)
-{
-	// 'a' - 1 -яснее выражает мысль
+// Program, that prints:
+// a, aba, abacaba, ...
+
+// Needed on github
+
+// DONE
+
+void GenerateString(int n, char * string) {
 	char local_char = 96;
 	char * local_string = string;
 	int half_len;

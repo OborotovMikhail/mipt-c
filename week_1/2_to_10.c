@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <math.h>
 
+// Transform a number from 2 system to 10 system
+
+// Needed on github
+
+// DONE
+
 int func_2to10 (int input) {
 	int res = 0, staff, len = 0, plus, current;
 	staff = input;

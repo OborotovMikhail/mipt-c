@@ -2,6 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 
+// Program that splits a sentence into words
+
+// Needed on github
+
+// DONE
+
 #define len 100
 
 void PrintWords(char * string) {

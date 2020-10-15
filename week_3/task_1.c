@@ -4,19 +4,15 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-//DONE
+// Task 1 from the presentation 3
+// I am a child or a parent
 
-int main()
-{	
-	int N = 3;
+// Not needed on github
 
-	for (int i = 0; i < N; ++i) {
-		pid_t pid = fork();
-		if (pid == 0) {
-			sleep(i + 1);
-			printf("%d\n", i);
-		}
-	}
+// NOT DONE
+
+int main() {	
+	
 	
 	return 0;
 }
