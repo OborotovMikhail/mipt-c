@@ -9,22 +9,26 @@
 
 // Needed on github
 
-// NOT DONE
+// DONE
 
 int main() {
-	size_t size = 0;;
+	// Creating a pipe
 	int fd[2];
-
-	int i = 0;
-
-	char * string = (char *) malloc(10 * sizeof(char));
-
-	while (1) {
-		i++;
-		write( fd[1], string, 1);
-		printf("%d\n", i);
+	if (pipe(fd) == -1) {
+		printf("Failed to create a pipe\n");
+		exit(-1);
 	}
 
+	// Writing to pipe and printing the lengh of a pipe
+	int len = 1, dummy = 0;
+	do {
+		write(fd[1], &dummy, sizeof(int));
+		printf("%d\n", len);
+		len++;
+	} while (1);
+	
+	close(fd[0]);
+	close(fd[1]);
 
 	return 0;
 }
