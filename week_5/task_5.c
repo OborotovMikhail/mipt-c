@@ -8,87 +8,102 @@
 #include <string.h>
 
 // Task 5 from presentation 5
-// Messanger with processes
+// Messanger with threads
 
 // Needed on github
 
 // NOT DONE YET
 
-int main(char argc, char* argv[]) {
-    
-    int MAX_SIZE = 1000;
-    char* string = (char*) calloc(MAX_SIZE + 1, sizeof(char));    
-    int fd, res, n;
+#define MAX_SIZE 1000
+
+struct info {
+    char* name;
+};
+
+// Read function
+void* Read (void* a) {
+
+    struct info* dummy = (struct info*) a;
+
+    int fd;
+
+    if ((fd = open (dummy->name, O_RDONLY)) < 0) {
+        printf("Could not open FIFO for reading\n");
+        exit(-1);
+    }
+
+    char string [MAX_SIZE + 5] = {};
+
+    while (1) {
+        int size = read(fd, string, MAX_SIZE);
+        printf("%s", string);
+        memset(string, '\0', MAX_SIZE);
+    }
+
+    return NULL;
+}
+
+// Write function
+void *Write ( void* a ) {
+
+    struct info* dummy = ( struct info* ) a;
+    int fd;
+
+    if ((fd = open (dummy->name, O_WRONLY)) < 0) {
+        printf ( "Can't open FIFO for writting\n" );
+        exit ( -1 );
+    }
+
+    char string [MAX_SIZE + 5] = {};
+
+    while (1) {
+        fgets(string, MAX_SIZE, stdin);
+        write(fd, string, MAX_SIZE);
+        memset(string, '\0', MAX_SIZE);
+    }
+
+    return NULL;
+}
+
+int main (char argc, char* argv[]) {
+
+    int f1, f2, res;
     size_t size;
-    char file1[] = "1.fifo", file2[] = "2.fifo";
+    pthread_t thid1, thid2, mythid;
 
-    n = atoi(argv[1]);
-    
-    (void) umask(0);
+    (void)umask(0);
 
-    // Creating fifo
-    mknod(file1, S_IFIFO | 0666, 0);
-    mknod(file2, S_IFIFO | 0666, 0);
+    // Creating fifos
+    mknod ("0", S_IFIFO | 0666, 0);
+    mknod ("1", S_IFIFO | 0666, 0);
 
-    // fork
-    if ((res = fork()) < 0 ) {
-		printf ( "Can\'t create child process\n" );
-		exit (-1);
+    char num_read [2] = {};
+    char num_write [2] = {};
+
+    // Read/write directions for each client
+    int client_id = atoi(argv [1]);
+    if (client_id == 1) {
+        num_read[0] = '1';
+        num_write[0] = '0';
     }
-    
-    // Client number 1
-    if ( n == 1 ) {
-    	// fork() == 0
-        if ( res == 0 ) {
-	    	if (( fd = open ( file1, O_WRONLY )) < 0) {
-	        	printf ( "Can't open 1to2 FIFO for writing!\n" );
-                exit ( -1 );
-	    	} else {
-            	while ( 1 ) {
-            		fgets ( string, MAX_SIZE, stdin );
-		    		write ( fd, string, MAX_SIZE );
-				}
-	    	}
-		} else {
-		// fork() != 0
-			if ((fd = open (file2, O_RDONLY)) < 0) {
-            	printf ("Can't open 2to1 FIFO for reading!\n");
-            	exit (-1);
-        	} else {
-				while (1) {
-		    		read(fd, string, MAX_SIZE);
-		    		printf("%s\n", string);
-				}
-	    	}
-		}
-    }
-	
-	// Client number 2    
-    if (n == 2) {
-	// fork() == 0	    
-	if (res == 0) {
-            if ((fd = open(file2, O_WRONLY)) < 0) {
-                printf("Can't open 2to1 FIFO for writing!\n");
-                exit(-1);
-            } else {
-                while (1) {
-                    fgets (string, MAX_SIZE, stdin);
-                    write (fd, string, MAX_SIZE);
-                }
-            }
-		} else {
-		// fork() != 0
-            if ((fd = open(file1, O_RDONLY)) < 0) {
-                printf("Can't open 1to2 FIFO for reading!\n");
-                exit(-1);
-            } else {
-                while (1) {
-                    read(fd, string, MAX_SIZE);
-                    printf("%s\n", string);
-                }
-            }
-        }
+    if (client_id == 2) {
+        num_read[0] = '0';
+        num_write[0] = '1';
     }
 
-    return 0;  
+    pthread_t read_id, write_id;
+    struct info info_read, info_write;
+
+    info_read.name = num_read;
+    info_write.name = num_write;
+
+    // Creating threads for reading and writing
+    struct info info_read, info_write;
+    pthread_create(&thid1, NULL, Read, &info_read);
+    pthread_create(&thid2, NULL, Write, &info_write);
+
+    pthread_join (thid1, NULL);
+
+    return 0;
+
 }
