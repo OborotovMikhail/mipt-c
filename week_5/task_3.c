@@ -12,7 +12,7 @@
 // Task 3 from presentation 5
 // Like the example but 3 threads instead of 2
 
-// Not needed on git
+// Needed on git
 
 // NOT DONE (maybe done)
 

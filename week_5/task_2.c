@@ -12,7 +12,7 @@
 // Task 2 from presentation 5
 // Sort function
 
-// Not needed on git
+// Needed on git
 
 // NOT DONE
 
