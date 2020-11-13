@@ -7,17 +7,16 @@
 #include <sys/stat.h>
 #include <time.h>
 #include <fcntl.h>
+#include <errno.h>
 
 // Task 3 from presentation 7
-// 
 
-// Needed on github
+// Needed on github?
 
-// NOT DONE YET
-
+// NOT DONE
 
 int main(int argc, char *argv[]) {
-
 	
+
 	return 0;
 }
