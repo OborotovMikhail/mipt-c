@@ -36,7 +36,7 @@ int main(int argc, char *argv[]) {
 
 	// Opening the file
 	FILE* txt;
-	txt = fopen("task_5_text.txt", "r");
+	txt = fopen("task-5-text.txt", "r");
 	if (txt == NULL) {
 		printf("Can\'t open file\n");
 		return 1;

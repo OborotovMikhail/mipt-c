@@ -15,7 +15,7 @@ int main() {
 	int fd, N;
 
 	// Opening text file
-	if ( (fd = open("task_1_text.txt", O_RDONLY, 0666)) < 0 ) {
+	if ( (fd = open("task-1-text.txt", O_RDONLY, 0666)) < 0 ) {
 		printf("Error opening text file\n");
 		return 1;
 	}
